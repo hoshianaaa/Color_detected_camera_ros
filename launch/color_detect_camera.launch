@@ -1,0 +1,4 @@
+<launch>
+  <node name="opencv_ros2" pkg="opencv_practice" type="opencv_ros2" output="screen"/>
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="log"/>
+</launch>
