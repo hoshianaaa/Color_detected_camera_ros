@@ -17,7 +17,7 @@ class ImageConverter
     image_transport::Subscriber image_sub_;
     image_transport::Publisher image_pub_ori_;
     image_transport::Publisher image_pub_drawn_;
-
+    ros::Publisher chatter_pub = nh_.advertise<std_msgs::String>("chatter_color", 1000); 
 public:
     ImageConverter(ros::NodeHandle& nh)
     {
@@ -114,11 +114,29 @@ public:
        ROS_INFO("%s", msg_info.data.c_str());
        cv::imshow(OPENCV_WINDOW, cv_ptr->image);
 */
-       
-       
-       if (red_image_count > 20000)ROS_INFO("RED!!!");
-       if (yellow_image_count > 50000)ROS_INFO("YELLOW!!!");
-       if (blue_image_count > 30000)ROS_INFO("BLUE!!!");
+       //色をパブリッシュ
+       std_msgs::String msg_color;
+       if (red_image_count > 20000){
+           ROS_INFO("RED!!!");
+           std::stringstream ss;
+           ss << "red";
+           msg_color.data = ss.str();
+           chatter_pub.publish(msg_color);
+       }
+       if (yellow_image_count > 50000){
+           ROS_INFO("YELLOW!!!");
+           std::stringstream ss;
+           ss << "yellow";
+           msg_color.data = ss.str();
+           chatter_pub.publish(msg_color);
+       }
+       if (blue_image_count > 30000){
+           ROS_INFO("BLUE!!!");
+           std::stringstream ss;
+           ss << "blue";
+           msg_color.data = ss.str();
+           chatter_pub.publish(msg_color);
+       }
        
 
         //結果の描画
