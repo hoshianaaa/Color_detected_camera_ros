@@ -23,6 +23,10 @@ target_link_libraries(opencv_ros2 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 add_executable(check_photo src/check_photo.cpp)
 target_link_libraries(check_photo ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
+add_executable(position_get src/position_get.cpp)
+target_link_libraries(position_get ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
+
 
 
 
